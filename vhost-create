@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# vhost-create: Create vhosts based on a very simple, bare-bones structure. Requires vhosts to be working in Apache already
+# Your apache2.conf or httpd.conf needs to include the following line (search for 'httpd-vhosts.conf', place it after this):
+# Include /private/etc/apache2/extra/vhosts/*.conf
+
+# Then, you need to create a file called ~/.vhost-tools.cfg which has the following param defined (note no trailing slash):
+# document_root="/Users/mpeel/Sites"
+
+# The above config file will be included, and used as the base for the document, with arg 1 to the script being the folder inside this docroot
+
+# Example usage: ./vhost-create silverstripe dev.silverstripe.com
+
+##
+## Author: matt@madman.net.nz
+##
+
+# Read config from ~/.vhost-tools.cfg
+if [ -r ~/.vhost-tools.cfg ]; then
+	. ~/.vhost-tools.cfg
+else
+	echo "Read the $0 file in your text editor of choice to see how it works. You need to create the ~/.vhost-tools.cfg file"
+	exit 1
+fi
+
+cat >/private/etc/apache2/extra/vhosts/$1.conf <<EOL
+<VirtualHost *:80>
+	DocumentRoot ${document_root}/${1}
+	ServerName ${2}
+</VirtualHost>
