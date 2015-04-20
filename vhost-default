@@ -1,3 +1,5 @@
 #!/bin/bash
 rm /private/etc/apache2/extra/vhosts/_default.conf
 ln -s /private/etc/apache2/extra/vhosts/$1.conf /private/etc/apache2/extra/vhosts/_default.conf
+
+sudo httpd -k restart

@@ -28,3 +28,8 @@ cat >/private/etc/apache2/extra/vhosts/$1.conf <<EOL
 	DocumentRoot ${document_root}/${1}
 	ServerName ${2}
 </VirtualHost>
+EOL
+
+printf '\n%s\t%s\n' '127.0.0.1' ${2} >> /etc/hosts
+
+sudo httpd -k restart
