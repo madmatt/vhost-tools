@@ -23,7 +23,7 @@ else
 	exit 1
 fi
 
-cat >/private/etc/apache2/extra/vhosts/$1.conf <<EOL
+cat >/usr/local/etc/apache2/2.4/extra/vhosts/$1.conf <<EOL
 <VirtualHost *:80>
 	DocumentRoot ${document_root}/${1}
 	ServerName ${2}
