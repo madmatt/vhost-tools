@@ -23,7 +23,7 @@ else
 	exit 1
 fi
 
-cat >/usr/local/etc/apache2/2.4/extra/vhosts/$1.conf <<EOL
+cat >/private/etc/apache2/extra/vhosts/$1.conf <<EOL
 <VirtualHost *:80>
 	DocumentRoot ${document_root}/${1}
 	ServerName ${2}
@@ -32,4 +32,4 @@ EOL
 
 printf '\n%s\t%s\n' '127.0.0.1' ${2} >> /etc/hosts
 
-sudo httpd -k restart
+sudo apachectl restart
